@@ -1,0 +1,22 @@
+syntax = "proto2";
+package PGProto;
+
+message Header {
+  required uint64 tick_freq = 1;
+}
+
+message MemAccess {
+  required uint64 addr = 1;
+  required uint32 size = 2;
+}
+
+message ExecTrace {
+  required fixed64 tick = 1;
+  required fixed64 cycle = 2;
+  required uint64 pc = 3;
+  optional uint32 upc = 4;
+
+  required bool predicate = 5;
+  optional uint64 data = 6;
+  optional MemAccess mem = 7;
+}

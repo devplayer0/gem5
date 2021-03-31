@@ -1,0 +1,22 @@
+from gem5_scons import Transform
+
+Import('*')
+
+class PyProtoBuf(ProtoBuf):
+    def __init__(self, source, tags=None, add_tags=None):
+        super(PyProtoBuf, self).__init__(source, tags, add_tags)
+
+        self.py_file = File(self.extname[0] + '_pb2.py')
+
+# Only build if we have protobuf support
+if env['HAVE_PROTOBUF']:
+    PyProtoBuf('trace.proto')
+
+    if env['HAVE_PROTOC']:
+        for proto in PyProtoBuf.all:
+            env.Command([proto.py_file], proto.tnode,
+                        MakeAction('${PROTOC} --python_out ${TARGET.dir} '
+                                '--proto_path ${SOURCE.dir} $SOURCE',
+                                Transform("PROTOC")))
+
+            PySource('m5', proto.py_file)

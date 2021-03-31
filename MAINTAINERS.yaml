@@ -316,3 +316,10 @@ website:
   maintainers:
     - Bobby Bruce <bbruce@ucdavis.edu>
     - Hoa Nguyen <hoanguyen@ucdavis.edu>
+
+perfgrade:
+  desc: >-
+    Perfgrade customisations
+  status: maintained
+  maintainers:
+    - Jack O'Sullivan <osullj19@tcd.ie>

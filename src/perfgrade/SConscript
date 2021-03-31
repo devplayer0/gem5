@@ -1,0 +1,13 @@
+
+Import('*')
+
+SimObject('ARMROMWorkload.py')
+SimObject('MemDump.py')
+
+Source('workload.cc')
+Source('mem_dump.cc')
+
+# Only build if we have protobuf support
+if env['HAVE_PROTOBUF']:
+    SimObject('PerfgradeTracer.py')
+    Source('tracer.cc')
